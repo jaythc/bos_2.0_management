@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>layout布局页面</title>
+    <!--导入jquery-->
+    <script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+	<!-- easyui核心文件 -->
+	<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+	<!--默认css样式-->
+	<link id="easyuiTheme" rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css" />	
+	<!--默认图标样式-->
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css" />
+	<!--国际化语言-->
+	<script type="text/javascript" src="../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#tab1").click(function(){
+				//添加选项卡
+				$("#mytabs").tabs('add',{
+					title:'传智播客',
+					content: "黑马程序员",
+					//创建的新的选项卡可以被关闭
+					closable:true
+				});
+			})
+		})
+	</script>
+
+</head>
+<body class="easyui-layout">
+	
+	<!--布局容器,有五个区域:北、南、东、西和中心-->
+    <div data-options="region:'north',title:'BOS2.0管理系统'" style="height: 100px;">北部区域 </div>
+    <div data-options="region:'west',title:'菜单导航' " style="width: 150px;">
+    	
+    	<!--西部区域折叠面板 accordion-->
+    	<div class="easyui-accordion" data-options="fit:true" >
+    		<div data-options="title:'基础菜单'"> 面板1<br />
+    			<a href="javascript:void(0)" id="tab1"> 点击我生成选项卡</a>
+    		
+    		</div>
+    		
+    		<div data-options="title:'系统菜单'">面板2 </div>
+    		<div data-options="title:'配送菜单'"> 面板3</div>
+    		<div data-options="title:'基础菜单'"> 面板1</div>
+    		<div data-options="title:'系统菜单'">面板2 </div>
+    	
+    	</div>
+    	
+    </div>
+    <div data-options="region:'center', title:'中部区域'">
+    	
+		<!-- 选项卡面板 -->	
+		<div class="easyui-tabs"  id="mytabs">
+			<div data-options="title:'选项卡面板1',closable:true">选项卡面板111111</div>
+			<div data-options="title:'选项卡面板2'">选项卡面板222222222222</div>
+		</div>
+
+
+	</div>
+    <div data-options="region:'east',title:'东部区域'" style="width: 150px;">东部区域</div>
+    <div data-options="region:'south',title:'南部区域'" style="height: 100px;">南部区域</div>
+	
+</body>
+</html>

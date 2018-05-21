@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>layout布局页面</title>
+    <!--导入jquery-->
+    <script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+	<!-- easyui核心文件 -->
+	<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+	<!--默认css样式-->
+	<link id="easyuiTheme" rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css" />	
+	<!--默认图标样式-->
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css" />
+	<!--国际化语言-->
+	<script type="text/javascript" src="../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	<!-- 引入 ztree -->
+	<script type="text/javascript" src="../js/ztree/jquery.ztree.all-3.5.js" ></script>
+	
+	<link rel="stylesheet" type="text/css" href="../js/ztree/zTreeStyle.css" />
+	
+	<script type="text/javascript">
+		$(function(){
+			//ztree菜单的设置
+			var setting = {
+				data: {
+					simpleData: {
+						//开启简单json数据的支持
+						enable: true
+					}
+				}
+			};
+			
+			//提供ztree树形的菜单数据
+			var zNodes = [
+				{id:1,pId:0,name:"湖北省"},
+				{id:2,pId:0,name:"浙江省"},
+				{id:11,pId:1,name:"武汉市"},
+				{id:12,pId:1,name:"荆州市"},
+				{id:13,pId:2,name:"杭州市"},
+				{id:14,pId:2,name:"温州市"}
+			];
+			//生成菜单.   传入id , 设置, 菜单节点
+			$.fn.zTree.init($("#baseMenu"),setting,zNodes);
+		});
+	</script>
+</head>
+<body class="easyui-layout">
+	
+	<!--布局容器,有五个区域:北、南、东、西和中心-->
+    <div data-options="region:'north',title:'BOS2.0管理系统'" style="height: 100px;">北部区域 </div>
+    <div data-options="region:'west',title:'菜单导航' " style="width: 150px;">
+    	
+    	<!--西部区域折叠面板 accordion-->
+    	<div class="easyui-accordion" data-options="fit:true" >
+    		<div data-options="title:'基础菜单'"> 
+    			<!--通过ztree插件, 制作树菜单-->
+    			<ul id="baseMenu" class="ztree"></ul>
+    		</div>
+    		<div data-options="title:'系统菜单'">面板2 </div>
+    	</div>
+    </div>
+    
+    <div data-options="region:'center', title:'中部区域'">
+
+	</div>
+    <div data-options="region:'east',title:'东部区域'" style="width: 150px;">东部区域</div>
+    <div data-options="region:'south',title:'南部区域'" style="height: 100px;">南部区域</div>
+	
+</body>
+</html>

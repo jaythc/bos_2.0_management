@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
+ 	
+ 	<!-- 配置job -->
+ 	<bean id="promotionJob" 
+ 		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+ 		<!--  写入job接口的实现类 -->
+ 		<property name="jobClass" value="cn.itcast.bos.quartz.PromotionJob" />
+ 	</bean>
+ 	
+ 	<!--配置 trigger -->
+ 	<bean id="simpleTrigger" 
+ 		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+ 		<property name="jobDetail" ref="promotionJob" />
+ 		<!-- 30秒后第一次执行, 时间单位为毫秒 -->
+ 		<property name="startDelay" value="30000" />
+ 		<!-- 15秒重复执行 -->
+ 		<property name="repeatInterval" value="15000" />
+ 	</bean>
+ 	
+ 	<!-- <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+ 		<property name="jobDetail" ref="helloJob" />
+ 		<property name="cronExpression" value="*/5 * * ? * *"></property>
+ 	</bean> -->
+ 	
+ 	<!-- 配置scheduler    -->
+ 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+ 		<!--  解决job的是实现类中, 无法注入spring的适配器工厂  -->
+ 		<property name="jobFactory" ref="jobFactory" /> 
+ 		<!--  可以配置很多个触发, triggers是个可变参数  -->
+ 		<property name="triggers">
+ 			<list>
+ 				<ref bean="simpleTrigger"/>
+ 			</list>
+ 		</property>
+ 	</bean>
+ 	
+</beans>
