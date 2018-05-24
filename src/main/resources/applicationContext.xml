@@ -81,5 +81,6 @@
 	
 	<import resource="applicationContext-webService.xml"/>
 	<import resource="applicationContext-quartz.xml"/>
-	
+	<!-- 引入activeMQ的配置  -->
+	<import resource="applicationContext-mq.xml"/>
 </beans>
