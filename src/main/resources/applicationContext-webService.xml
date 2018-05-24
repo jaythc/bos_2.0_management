@@ -17,7 +17,7 @@
 		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- 写一个id , 配一个服务的地址  -->
+	<!-- 写一个id , 配一个服务的地址   宣传 活动的服务接口   -->
 	<jaxrs:server id="promotionService" address="/promotionService">
 		<jaxrs:serviceBeans>
 			<!-- 配置服务接口的实现类  -->
@@ -25,8 +25,13 @@
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 	     
-	
-	    
+	     <!-- 订单的接口    -->
+	 <jaxrs:server id="orderService" address="/orderService">
+		<jaxrs:serviceBeans>
+			<!-- 配置服务接口的实现类  -->
+			<bean  class="cn.itcast.bos.service.take_delivery.impl.OrderServiceImpl"></bean>
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
 	
 	
 	

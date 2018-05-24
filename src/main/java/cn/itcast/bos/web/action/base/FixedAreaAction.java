@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.itcast.bos.domain.base.FixedArea;
+import cn.itcast.bos.domain.constant.Constants;
 import cn.itcast.bos.service.base.FixedAreaService;
 import cn.itcast.bos.web.action.common.BaseAction;
 import cn.itcast.crm.domain.Customer;
@@ -76,7 +77,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		String customerIdStr = StringUtils.join(customerIds,",");
 		
 		//以Restful 调用crm系统的put请求方式 ,修改方法
-		WebClient.create("http://localhost:9011/crm_management/services/customerService/associatecustomertofixedarea?customerIdStr="+customerIdStr+"&fixedAreaId="+model.getId()).put(null);
+		WebClient.create(Constants.CRM_MANAGEMENT_URL+"/services/customerService/associatecustomertofixedarea?customerIdStr="+customerIdStr+"&fixedAreaId="+model.getId()).put(null);
 		return SUCCESS;
 	}
 
@@ -84,7 +85,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	//查询已关联定区列表  .  通过webService调用crm_management
 	@Action(value="fixedArea_findHasAssociationFixedAreaCustomers",results={@Result(name="success",type="json")})
 	public String findNoAssociatedCustomers(){  // accept 表示返回给浏览器的数据类型    type传参 的类型, 这里是表示传递的定区的id的类型 
-		Collection<? extends Customer> collection = WebClient.create("http://localhost:9011/crm_management/services/customerService/hasassociatedcustomers/"
+		Collection<? extends Customer> collection = WebClient.create(Constants.CRM_MANAGEMENT_URL+"/services/customerService/hasassociatedcustomers/"
 				+model.getId()).accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
@@ -95,7 +96,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	//fixedArea_findNoAssociationCustomers
 	@Action(value="fixedArea_findNoAssociationCustomers",results={@Result(name="success",type="json")})
 	public String findNoAssociationCustomers(){
-		Collection<? extends Customer> collection = WebClient.create("http://localhost:9011/crm_management/services/customerService/noassociatedcustomers").accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
+		Collection<? extends Customer> collection = WebClient.create(Constants.CRM_MANAGEMENT_URL+"/services/customerService/noassociatedcustomers").accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
 	}
@@ -133,9 +134,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 				return cb.and(list.toArray(new Predicate[list.size()]));
 			}
 		};
-		
 		Page<FixedArea> result =  fixedAreaService.pageQuery(specification,pageable);
-		
 		this.pushPageDataValueStack(result);
 		
 		return SUCCESS;

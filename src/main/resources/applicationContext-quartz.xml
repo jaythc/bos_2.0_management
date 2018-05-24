@@ -18,9 +18,9 @@
  		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
  		<property name="jobDetail" ref="promotionJob" />
  		<!-- 30秒后第一次执行, 时间单位为毫秒 -->
- 		<property name="startDelay" value="30000" />
+ 		<property name="startDelay" value="30000000" />
  		<!-- 15秒重复执行 -->
- 		<property name="repeatInterval" value="15000" />
+ 		<property name="repeatInterval" value="1500000000" />
  	</bean>
  	
  	<!-- <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">

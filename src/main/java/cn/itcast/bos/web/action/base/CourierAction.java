@@ -59,10 +59,6 @@ public class CourierAction extends BaseAction<Courier> {
 		return SUCCESS;
 	}
 	
-	
-	
-	
-	
 	//批量还原
 	@Action(value="courier_restoreBatch",results={@Result(name="success",
 			location="pages/base/courier.html",type="redirect")})
@@ -87,7 +83,7 @@ public class CourierAction extends BaseAction<Courier> {
 	
 	//保存快递员信息
 	@Action(value="courier_save",results={@Result(name="success",
-			location="./pages/base/courier.html",type="redirect")})
+			location="pages/base/courier.html",type="redirect")})
 	public String save(){
 		courierService.save(model);
 		return SUCCESS;
