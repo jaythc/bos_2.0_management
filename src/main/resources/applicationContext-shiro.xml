@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	
+	<!-- 配置Shiro核心Filter  --> 
+	<bean id="shiroFilter" 
+		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 安全管理器 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 未认证，跳转到哪个页面      -->
+		<property name="loginUrl" value="/login.html" />
+		<!-- 登录成功跳转页面         -->
+		<property name="successUrl" value="/index.html" />
+		<!-- 认证后，没有权限跳转页面 -->
+		<property name="unauthorizedUrl" value="/500.html" />
+		<!-- shiro URL控制过滤器规则  -->
+		<property name="filterChainDefinitions">
+			<value>
+                <!--未登录可以访问的 -->
+				/login.html* = anon
+                <!--  放行验证码  -->
+                /validatecode.jsp* = anon
+                <!--** 代表 包含子目录   -->
+				/css/** = anon
+				/js/** = anon
+				/images/** = anon
+                <!-- 放行 webService  -->
+				/services/** = anon
+				/user_login.action* = anon
+                <!--给courier页面增加 访问权限 只有该权限的才能访问  -->
+				/pages/base/courier.html* = perms[courier:list]
+                <!-- 给courier的页面增加角色权限  -->
+                /pages/base/area.html* = roles[base]
+				/** = authc
+			</value>
+		</property>
+	</bean>
+
+    <!-- 安全管理器  -->
+    <bean id="securityManager"
+          class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="bosRealm" />
+        <property name="cacheManager" ref="shiroCacheManager" />
+    </bean>
+
+    <!-- Shiro生命周期处理器  -->
+    <bean id="lifecycleBeanPostProcessor"
+          class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- 开启shiro注解模式  -->
+    <bean
+            class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+            depends-on="lifecycleBeanPostProcessor" />
+        <!-- 开启cglib代理  用于细粒度的权限控制   -->
+        <!--<property name="proxyTargetClass" value="true" />-->
+    <!--</bean>-->
+    <!--   拦截器的通知   -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!-- 配置Realm -->
+    <bean id="bosRealm" class="cn.itcast.bos.realm.BosRealm">
+        <!-- 缓存区的名字 就是 ehcache.xml 自定义 cache的name -->
+        <property name="authorizationCacheName" value="bos" />
+    </bean>
+
+
+
+
+	<!--   
+		/pages/base/courier.html* = perms[permission1]
+				/pages/base/fixed_area.html* = perms[permission2]
+				/pages/base/standard.html* = roles[role1]
+			/fixedArea_save.action* = perms[courier1:list]
+			/fixedArea_pageQuery.action* = perms[courier1:list]	
+	  -->
+
+	<!-- <property name="filters">
+            <map>
+                <entry key="authc" value-ref="loginFormAuthenticationFilter"/>
+            </map>
+        </property> 
+        
+        <bean id="loginFormAuthenticationFilter" 
+		class="cn.itcast.bos.shiro.filter.LoginFormAuthenticationFilter">
+	</bean>
+        -->
+	
+</beans>

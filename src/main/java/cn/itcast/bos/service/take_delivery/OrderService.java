@@ -12,6 +12,8 @@ public interface OrderService  {
 	@POST
 	@Consumes({"application/xml","application/json"})
 	public void saveOrder(Order order);
+
+	public Order findByOrderNum(String orderNum);
 	
 	
 }

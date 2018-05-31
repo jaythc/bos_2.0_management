@@ -60,14 +60,14 @@ public class OrderServiceImpl implements OrderService {
 	@Qualifier("jmsQueueTemplate")
 	private JmsTemplate jmsTemplate;
 
-	// 测试 webService
-	public static void main(String[] args) {
-		String fixedAreaId = WebClient
-				.create(Constants.CRM_MANAGEMENT_URL
-						+ "/services/customerService/customer/findFixedAreaIdByAddress?address=" + "曙光星城A区")
-				.accept(MediaType.APPLICATION_JSON).get(String.class);
-		System.out.println("fixedAreaId   " + fixedAreaId);
-	}
+	//// 测试 webService
+	//public static void main(String[] args) {
+	//	String fixedAreaId = WebClient
+	//			.create(Constants.CRM_MANAGEMENT_URL
+	//					+ "/services/customerService/customer/findFixedAreaIdByAddress?address=" + "曙光星城A区")
+	//			.accept(MediaType.APPLICATION_JSON).get(String.class);
+	//	System.out.println("fixedAreaId   " + fixedAreaId);
+	//}
 
 	@Override
 	public void saveOrder(Order order) {
@@ -208,7 +208,6 @@ public class OrderServiceImpl implements OrderService {
 				return mapMessage;
 			}
 		});
-
 		// 修改工单状态
 		workBill.setPickstate(" 已经通知 ");
 
@@ -217,11 +216,9 @@ public class OrderServiceImpl implements OrderService {
 	// 自动分单 保存订单
 	public void saveOrder(Order order, Courier courier) {
 		order.setCourier(courier);
-
 		// 设置自动分单的状态码
 		order.setOrderType("1");
 		orderRepository.save(order);
-
 	}
 
 	// 通过订单的号码查询订单
