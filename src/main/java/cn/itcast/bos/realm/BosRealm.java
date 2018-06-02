@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("bosRealm")
+//@Service("bosRealm")
 public class BosRealm extends AuthorizingRealm {
 
     private final Logger Log = LoggerFactory.getLogger(BosRealm.class);

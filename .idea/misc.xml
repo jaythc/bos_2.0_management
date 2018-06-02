@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../common_parent/pom.xml" />
         <option value="$PROJECT_DIR$/../common_parent/bos_fore/pom.xml" />
+        <option value="$PROJECT_DIR$/../common_parent/bos_domain/pom.xml" />
       </list>
     </option>
   </component>

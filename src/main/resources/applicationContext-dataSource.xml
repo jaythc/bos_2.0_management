@@ -52,31 +52,31 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
 		</property>
 			
-		<property name="jpaPropertyMap"> 
-			<map> 
- 					<!-- 将HQL映射成sql语句-->  
-				<entry key="hibernate.query.substitutions" value="true 1, false 0" /> 
-					
-					<!-- 为Hibernate关联的批量抓取设置默认数量.  建议的取值为4, 8, 和16 -->
-				<entry key="hibernate.default_batch_fetch_size" value="16" /> 
-					
-					<!-- 为单向关联(一对一, 多对一)的外连接抓取（outer join fetch）树设置最大深度. 值为0意味着将关闭默认的外连接抓取. 取值 建议在0到3之间取值   -->
-				<entry key="hibernate.max_fetch_depth" value="2" /> 
-					
-					<!-- 如果开启, Hibernate将收集有助于性能调节的统计数据.取值true | false -->
- 				<entry key="hibernate.generate_statistics" value="true" /> 
-					
-					<!-- 	开启CGLIB来替代运行时反射机制(系统级属性). 反射机制有时在除错时比较有用. 注意即使关闭这个优化,
-					 Hibernate还是需要CGLIB. 你不能在hibernate.cfg.xml中设置此属性.取值true | false -->
-				<entry key="hibernate.bytecode.use_reflection_optimizer" value="true" />
-					
-					<!-- 能用来完全禁止使用二级缓存. 对那些在类的映射定义中指定的类，会默认开启二级缓存. 取值 true|false -->
-				<entry key="hibernate.cache.use_second_level_cache" value="false" /> 
-					
-					<!-- 允许查询缓存, 个别查询仍然需要被设置为可缓存的. 取值 true|false -->
-				<entry key="hibernate.cache.use_query_cache" value="false" />
-			</map> 
- 		</property> 
+		<!--<property name="jpaPropertyMap"> -->
+			<!--<map> -->
+ 					<!--&lt;!&ndash; 将HQL映射成sql语句&ndash;&gt;  -->
+				<!--<entry key="hibernate.query.substitutions" value="true 1, false 0" /> -->
+					<!---->
+					<!--&lt;!&ndash; 为Hibernate关联的批量抓取设置默认数量.  建议的取值为4, 8, 和16 &ndash;&gt;-->
+				<!--<entry key="hibernate.default_batch_fetch_size" value="16" /> -->
+					<!---->
+					<!--&lt;!&ndash; 为单向关联(一对一, 多对一)的外连接抓取（outer join fetch）树设置最大深度. 值为0意味着将关闭默认的外连接抓取. 取值 建议在0到3之间取值   &ndash;&gt;-->
+				<!--<entry key="hibernate.max_fetch_depth" value="2" /> -->
+					<!---->
+					<!--&lt;!&ndash; 如果开启, Hibernate将收集有助于性能调节的统计数据.取值true | false &ndash;&gt;-->
+ 				<!--<entry key="hibernate.generate_statistics" value="true" /> -->
+					<!---->
+					<!--&lt;!&ndash; 	开启CGLIB来替代运行时反射机制(系统级属性). 反射机制有时在除错时比较有用. 注意即使关闭这个优化,-->
+					 <!--Hibernate还是需要CGLIB. 你不能在hibernate.cfg.xml中设置此属性.取值true | false &ndash;&gt;-->
+				<!--<entry key="hibernate.bytecode.use_reflection_optimizer" value="true" />-->
+					<!---->
+					<!--&lt;!&ndash; 能用来完全禁止使用二级缓存. 对那些在类的映射定义中指定的类，会默认开启二级缓存. 取值 true|false &ndash;&gt;-->
+				<!--<entry key="hibernate.cache.use_second_level_cache" value="false" /> -->
+					<!---->
+					<!--&lt;!&ndash; 允许查询缓存, 个别查询仍然需要被设置为可缓存的. 取值 true|false &ndash;&gt;-->
+				<!--<entry key="hibernate.cache.use_query_cache" value="false" />-->
+			<!--</map> -->
+ 		<!--</property> -->
 	</bean>
 	
 	<!-- JPA事务管理器  -->

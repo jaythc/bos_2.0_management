@@ -4,6 +4,7 @@ import cn.itcast.bos.dao.take_delivery.WayBillRepository;
 import cn.itcast.bos.dao.transit.TransitInfoRepository;
 import cn.itcast.bos.domain.take_delivery.WayBill;
 import cn.itcast.bos.domain.transit.TransitInfo;
+import cn.itcast.bos.index.WayBillIndexRepository;
 import cn.itcast.bos.service.transit.TransitInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class TransitInfoServiceImpl implements TransitInfoService {
     @Autowired
     private TransitInfoRepository transitInfoRepository;
 
+    @Autowired
+    private WayBillIndexRepository wayBillIndexRepository;
+
 
     @Override
     public void createTransits(String wayBillIds) {
@@ -40,9 +44,10 @@ public class TransitInfoServiceImpl implements TransitInfoService {
                     transitInfo.setWayBill(wayBill);
                     transitInfo.setStatus("出入库中转");
                     transitInfoRepository.save(transitInfo);
-
                     // 更改运单的状态, 2代表派送中
                     wayBill.setSignStatus(2);
+                    // 同步索引库
+                  //  wayBillIndexRepository.save(wayBill);
                 }
             }
         }

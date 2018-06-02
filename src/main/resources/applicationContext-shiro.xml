@@ -54,7 +54,11 @@
         <property name="cacheManager" ref="shiroCacheManager" />
     </bean>
 
-    <!-- Shiro生命周期处理器  -->
+
+    <!-- Shiro生命周期处理器  帮助完成增强,
+     有处理前和处理后
+       aop对象进行增强
+       -->
     <bean id="lifecycleBeanPostProcessor"
           class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 

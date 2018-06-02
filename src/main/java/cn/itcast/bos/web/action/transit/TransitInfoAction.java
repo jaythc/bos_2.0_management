@@ -63,7 +63,6 @@ public class TransitInfoAction extends BaseAction<TransitInfo> {
         Pageable pageRequest = new PageRequest(page-1, rows);
         Page<TransitInfo> pageData =  transitInfoService.findAll(pageRequest);
         this.pushPageDataValueStack(pageData);
-
         return SUCCESS;
     }
 
