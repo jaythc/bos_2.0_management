@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 
 import cn.itcast.bos.domain.take_delivery.WayBill;
 
+import java.util.List;
+
 public interface WayBillService {
 
 	void save(WayBill model);
@@ -15,4 +17,6 @@ public interface WayBillService {
 
 
     void syncIndex();
+
+    List<WayBill> findWayBills(WayBill model);
 }

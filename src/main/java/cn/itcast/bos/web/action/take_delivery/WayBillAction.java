@@ -51,7 +51,8 @@ public class WayBillAction extends BaseAction<WayBill> {
 		return SUCCESS ;
 	}
 	
-	
+
+	// 无条件的分页查询与有条件的分页查询, 封装参数用模型驱动
 	@Action(value="waybill_pageQuery",results={@Result(name ="success",type="json")})
 	public String pageQuery(){
 		// 分页查询    new Sort(Sort.Direction.ASC,"id")  根据id 进行升序排序
